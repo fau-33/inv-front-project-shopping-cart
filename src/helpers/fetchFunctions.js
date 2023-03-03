@@ -3,5 +3,5 @@ export const fetchProduct = () => {
 };
 
 export const fetchProductsList = () => {
-  // seu código aqui
+  // começando de novo
 };
