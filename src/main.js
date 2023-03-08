@@ -15,10 +15,15 @@ function criaLoadingDeTexto() {
   loaderesSectionElemento.appendChild(loaderesPElemento);
 }
 
+function remuve() {
+  document.querySelector('.loading').remove();
+}
+
 async function listagemDeProdutosNaPagina() {
   criaLoadingDeTexto();
   const requisicaoProdutos = await fetchProductsList(searchProduct);
   const secaoProdutos = document.querySelector('.products');
+  remuve();
 
   requisicaoProdutos.forEach((product) => {
     const ProdutoEl = createProductElement(product);
