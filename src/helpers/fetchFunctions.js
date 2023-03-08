@@ -6,7 +6,7 @@ export const fetchProduct = () => {
 
 export const fetchProductsList = async (searchProduct) => {
   if (!searchProduct) {
-    throw new Error('Termo de busca não informado');
+    throw new Error('Termo de busca não encontrado');
   }
 
   const response = await fetch(API_URL + searchProduct);
