@@ -7,11 +7,12 @@ const searchProduct = 'computador';
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
 
-function criaLoadingDeTexto() {
+function criaLoadingDeTexto(textoCarregando, classeLoading) {
   const loaderesSectionElemento = document.querySelector('.container');
   const loaderesPElemento = document.createElement('p');
-  loaderesPElemento.innerText = 'carregando...';
-  loaderesPElemento.classList.add('loading');
+
+  loaderesPElemento.innerText = textoCarregando;
+  loaderesPElemento.classList.add(classeLoading);
   loaderesSectionElemento.appendChild(loaderesPElemento);
 }
 
@@ -20,15 +21,20 @@ function remuve() {
 }
 
 async function listagemDeProdutosNaPagina() {
-  criaLoadingDeTexto();
-  const requisicaoProdutos = await fetchProductsList(searchProduct);
-  const secaoProdutos = document.querySelector('.products');
-  remuve();
+  try {
+    criaLoadingDeTexto('carregando...', 'loading');
+    const requisicaoProdutos = await fetchProductsList(searchProduct);
+    const secaoProdutos = document.querySelector('.products');
+    remuve();
 
-  requisicaoProdutos.forEach((product) => {
-    const ProdutoEl = createProductElement(product);
-    secaoProdutos.appendChild(ProdutoEl);
-  });
+    requisicaoProdutos.forEach((product) => {
+      const ProdutoEl = createProductElement(product);
+      secaoProdutos.appendChild(ProdutoEl);
+    });
+  } catch (error) {
+    remuve();
+    criaLoadingDeTexto(error.message, 'error');
+  }
 }
 
 listagemDeProdutosNaPagina();
