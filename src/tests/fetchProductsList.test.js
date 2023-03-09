@@ -28,7 +28,7 @@ describe('Teste a função fetchProductsList', () => {
       try {
         await fetchProductsList()
       } catch(error) {
-        expect(fetchProductsList()).rejects.toThrow(Error('Termo de busca não encontrado'))
+        expect(fetchProductsList()).rejects.toThrow(Error('Algum erro ocorreu, recarregue a página e tente novamente'))
       }
     });
 });

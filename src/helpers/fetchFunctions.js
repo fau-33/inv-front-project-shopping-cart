@@ -7,7 +7,7 @@ export const fetchProduct = async (searchProductId) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error('Algum erro ocorreu..');
+    error.message();
   }
 };
 
