@@ -1,6 +1,7 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProductsList, fetchProduct } from './helpers/fetchFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
+import { getSavedCartIDs } from './helpers/cartFunctions';
 import './style.css';
 
 const searchProduct = 'computador';
@@ -39,3 +40,17 @@ async function listagemDeProdutosNaPagina() {
 
 listagemDeProdutosNaPagina();
 fetchProduct('MLB1405519561');
+
+const salvandoNoStorange = getSavedCartIDs
+  .map(async (element) => fetchProduct(element));
+
+const cartoesOrdenadas = async () => {
+  const promessas = await Promise.all(salvandoNoStorange);
+  promessas.forEach((element) => {
+    document
+      .querySelector('.cart__products')
+      .appendChild(createCartProductElement(element));
+  });
+};
+
+cartoesOrdenadas();
