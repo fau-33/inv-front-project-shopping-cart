@@ -5,7 +5,20 @@ import { fetchProduct } from './fetchFunctions';
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
 
 // Fique a vontade para modificar o código já escrito e criar suas próprias funções!
-
+export const calcularCartoes = () => {
+  const totalProdutos = document
+    .querySelector('.total-price');//
+  const cartoesProdutos = document
+    .querySelector('.cart__products');//
+  const valoresDosProdutos = cartoesProdutos
+    .querySelectorAll('.product__price__value');//
+  let subTotal = 0;
+  valoresDosProdutos
+    .forEach((item) => {
+      subTotal += parseFloat(item.innerText);//
+    });
+  totalProdutos.innerText = subTotal;//
+};
 /**
  * Função responsável por criar e retornar o elemento de imagem do produto.
  * @param {string} imageSource - URL da imagem.
@@ -49,6 +62,7 @@ export const getIdFromProduct = (product) => (
 const removeCartProduct = (li, id) => {
   li.remove();
   removeCartID(id);
+  calcularCartoes();
 };
 
 /**
@@ -132,6 +146,7 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
     const produto = await fetchProduct(cartãoId);
     const produtoEscolhido = createCartProductElement(produto);
     produtosCards.appendChild(produtoEscolhido);
+    calcularCartoes();
   };
 
   cartButton.addEventListener('click', addToCartButtons);

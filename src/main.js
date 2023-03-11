@@ -1,6 +1,7 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProductsList, fetchProduct } from './helpers/fetchFunctions';
-import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
+import { createProductElement,
+  createCartProductElement, calcularCartoes } from './helpers/shopFunctions';
 import { getSavedCartIDs } from './helpers/cartFunctions';
 import './style.css';
 
@@ -50,6 +51,7 @@ const cartoesOrdenadas = async () => {
       .querySelector('.cart__products')
       .appendChild(createCartProductElement(element));
   });
+  calcularCartoes();
 };
 
 cartoesOrdenadas();
