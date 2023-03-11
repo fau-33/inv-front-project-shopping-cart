@@ -39,7 +39,6 @@ async function listagemDeProdutosNaPagina() {
 }
 
 listagemDeProdutosNaPagina();
-fetchProduct('MLB1405519561');
 
 const salvandoNoStorange = getSavedCartIDs
   .map(async (element) => fetchProduct(element));
