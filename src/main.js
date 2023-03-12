@@ -41,16 +41,17 @@ async function listagemDeProdutosNaPagina() {
 
 listagemDeProdutosNaPagina();
 
-const salvandoNoStorange = getSavedCartIDs
+const salvandoNoStorange = getSavedCartIDs()
   .map(async (element) => fetchProduct(element));
 
 const cartoesOrdenadas = async () => {
   const promessas = await Promise.all(salvandoNoStorange);
-  promessas.forEach((element) => {
-    document
-      .querySelector('.cart__products')
-      .appendChild(createCartProductElement(element));
-  });
+  promessas
+    .forEach((element) => {
+      document
+        .querySelector('.cart__products')
+        .appendChild(createCartProductElement(element));
+    });
   calcularCartoes();
 };
 
