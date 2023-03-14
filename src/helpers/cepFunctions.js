@@ -2,15 +2,11 @@ export const getAddress = async (CEP) => {
   if (!CEP) {
     throw new Error('Forneça um CEP');
   }
-  try {
-    const [dataApi, data] = await Promise.all([
-      fetch(`https://cep.awesomeapi.com.br/json/${CEP}`).then((response) => response.json()),
-      fetch(`https://brasilapi.com.br/api/cep/v2/${CEP}`).then((response) => response.json()),
-    ]);
-    return dataApi ?? data;
-  } catch (error) {
-    throw new Error('Não foi possível obter o endereço para o CEP fornecido.');
-  }
+  const response1 = fetch(`https://cep.awesomeapi.com.br/json/${CEP}`).then((response) => response.json());
+  const response2 = fetch(`https://brasilapi.com.br/api/cep/v2/${CEP}`).then((response) => response.json());
+
+  const result = await Promise.any([response1, response2]);
+  return result;
 };
 
 export async function searchCep() {
