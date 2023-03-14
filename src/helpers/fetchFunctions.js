@@ -11,11 +11,13 @@ export const fetchProduct = async (searchProductId) => {
   }
 };
 
-export const fetchProductsList = async (searchProduct) => {
-  if (!searchProduct) throw new Error('Termo de busca não encontrado');
-
-  const API_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=';
-  const response = await fetch(API_URL + searchProduct);
-  const data = await response.json();
+export const fetchProductsList = async (paran) => {
+  if (paran === undefined) {
+    throw new Error('Termo de busca não informado');
+  }
+  const endres = `https://api.mercadolibre.com/sites/MLB/search?q=${paran}`;
+  // fazer requisicao da api
+  const requisicao = await fetch(endres);
+  const data = await requisicao.json();
   return data.results;
 };
